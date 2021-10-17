@@ -34,7 +34,12 @@ class SubscriberController extends Controller
 
     public function senEmail(){
         $post = Posts::find(2);
-        $user = User::find(1);
-        event(new PostAdded($user, $post));
+        $users = User::where('is_subscribe', 1)->get();
+        foreach($users as $user){
+            // fires event whenever new post created/added
+            event(new PostAdded($user, $post));
+        }
+
+        echo "Subscription email send successfully."; exit;
     }
 }
