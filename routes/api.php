@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/user/subscribe', 'SubscriberController@getSubscribe')->name('api.user.subscribe');
+Route::get('/send/subscriptionemail', 'SubscriberController@senEmail')->name('api.user.send.subscription.email');

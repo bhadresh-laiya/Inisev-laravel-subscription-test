@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\DbCreate;
 use App\Console\Commands\DbRefresh;
+use App\Console\Commands\SendEmailPosts;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,7 +17,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         DbCreate::class,
-        DbRefresh::class
+        DbRefresh::class,
+        SendEmailPosts::class
     ];
 
     /**

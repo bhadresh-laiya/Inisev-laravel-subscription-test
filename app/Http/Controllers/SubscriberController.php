@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Posts;
+use App\Events\PostAdded;
 
 class SubscriberController extends Controller
 {
@@ -28,5 +30,11 @@ class SubscriberController extends Controller
             //user id missing in request
             return response()->json(['message'=>'User missing.']);
         }
+    }
+
+    public function senEmail(){
+        $post = Posts::find(2);
+        $user = User::find(1);
+        event(new PostAdded($user, $post));
     }
 }
