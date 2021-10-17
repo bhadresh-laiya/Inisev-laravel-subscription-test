@@ -1,6 +1,4 @@
 <?php
-ini_set('memory_limit', '512M');
-
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,25 +11,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         /**
-         * Cities
+         * USER
          */
-        \Illuminate\Support\Facades\DB::table('cities')->delete();
-        $path = __DIR__.DIRECTORY_SEPARATOR.'city.list.min.json';
-        $citiesInsert = array();
-        foreach (json_decode(file_get_contents($path)) as $city){
-            $newCity = array(
-                'api_id' => $city->id,
-                'name' => $city->name,
-                'country_code' => $city->country,
-                'coord_lat' => $city->coord->lat,
-                'coord_lon' => $city->coord->lon
-            );
-            $citiesInsert[] = $newCity;
-            if(count($citiesInsert) >= 100){
-                \Illuminate\Support\Facades\DB::table('cities')->insert($citiesInsert);
-                $citiesInsert = array();
-            }
-        }
-        \Illuminate\Support\Facades\DB::table('cities')->insert($citiesInsert);
+        $users = factory(App\User::class, 10)->create();
+        $posts = factory(App\Posts::class, 10)->create();
     }
 }
